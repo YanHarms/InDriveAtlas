@@ -6,13 +6,20 @@ from fastapi.templating import Jinja2Templates
 import pandas as pd
 import random
 
-# Загружаем CSV
-df = pd.read_csv("static/data/clean_trips.csv")
+# --- CSV из Google Drive ---
+file_id = "1kDfy_hhFBPdmYb4qyY68EyT9dRHA4gPS"
+csv_url = f"https://drive.google.com/uc?id={file_id}"
 
-# Конвертируем в JSON для фронта (если нужно)
-df.to_json("static/data/clean_trips.json", orient="records", lines=False)
+df = pd.read_csv(csv_url)
 df["randomized_id"] = df["randomized_id"].astype(str)
 
+# --- JSON из Google Drive ---
+json_id = "1FkHtwdzjCwzRhOoM1zRBUt68RA5xZKE7"
+json_url = f"https://drive.google.com/uc?id={json_id}"
+
+# Скачиваем JSON через requests (чтобы избежать ошибок при чтении напрямую)
+response = requests.get(json_url)
+data_json = response.json()
 
 app = FastAPI()
 
