@@ -5,6 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pandas as pd
 import random
+import requests
+
 
 # --- CSV из Google Drive ---
 file_id = "1kDfy_hhFBPdmYb4qyY68EyT9dRHA4gPS"
