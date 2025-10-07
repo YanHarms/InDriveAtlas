@@ -91,7 +91,7 @@ async function loadDemandForecast() {
   }
 }
 
-// === 4. Скролл-хедер ===
+// === 4. Эффект белого хедера при скролле ===
 window.addEventListener("scroll", () => {
   const header = document.querySelector("header");
   const bg = document.querySelector(".header-bg");
@@ -114,10 +114,23 @@ document.querySelector(".demo-btn")?.addEventListener("click", () => {
   document.querySelector(".atlas")?.scrollIntoView({ behavior: "smooth" });
 });
 
-// === 6. Навешиваем обработчики на кнопки карты ===
+// === 6. Анимация появления блоков при скролле ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("fade-in");
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".feature, .capability, .faq-item, .atlas, .features, .capabilities").forEach(el => {
+  observer.observe(el);
+});
+
+// === 7. Навешиваем обработчики на кнопки карты ===
 document.getElementById("hotzonesBtn")?.addEventListener("click", loadHotZones);
 document.getElementById("simulateTripBtn")?.addEventListener("click", simulateRandomTrip);
 document.getElementById("forecastBtn")?.addEventListener("click", loadDemandForecast);
 
-// === 7. Лог при загрузке ===
-console.log("✅ InDriveAtlas script loaded!");
+// === 8. Лог при загрузке ===
+console.log("✅ InDriveAtlas script loaded with animations!");
