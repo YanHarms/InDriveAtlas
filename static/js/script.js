@@ -1,9 +1,9 @@
 // === InDriveAtlas JS ===
 // Работает с FastAPI API через endpoints: /hotzones, /trip/{id}, /random_trip_id, /demand_forecast
 
+// === 0. Инициализация карты ===
 const map = L.map("map").setView([51.1694, 71.4491], 11);
 
-// === Инициализация карты ===
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "© OpenStreetMap"
@@ -66,7 +66,9 @@ async function loadDemandForecast() {
     const response = await fetch("/demand_forecast");
     const data = await response.json();
 
-    const ctx = document.getElementById("forecastChart").getContext("2d");
+    const ctx = document.getElementById("forecastChart")?.getContext("2d");
+    if (!ctx) return console.warn("forecastChart canvas not found");
+
     new Chart(ctx, {
       type: "bar",
       data: {
@@ -89,10 +91,33 @@ async function loadDemandForecast() {
   }
 }
 
-// === Навешиваем обработчики ===
+// === 4. Скролл-хедер ===
+window.addEventListener("scroll", () => {
+  const header = document.querySelector("header");
+  const bg = document.querySelector(".header-bg");
+
+  if (window.scrollY > 50) {
+    header.classList.add("scrolled");
+    bg.classList.add("visible");
+  } else {
+    header.classList.remove("scrolled");
+    bg.classList.remove("visible");
+  }
+});
+
+// === 5. Плавный скролл по кнопкам ===
+document.querySelector(".more-btn")?.addEventListener("click", () => {
+  document.querySelector(".features")?.scrollIntoView({ behavior: "smooth" });
+});
+
+document.querySelector(".demo-btn")?.addEventListener("click", () => {
+  document.querySelector(".atlas")?.scrollIntoView({ behavior: "smooth" });
+});
+
+// === 6. Навешиваем обработчики на кнопки карты ===
 document.getElementById("hotzonesBtn")?.addEventListener("click", loadHotZones);
 document.getElementById("simulateTripBtn")?.addEventListener("click", simulateRandomTrip);
 document.getElementById("forecastBtn")?.addEventListener("click", loadDemandForecast);
 
-// === При загрузке ===
-console.log("InDriveAtlas script loaded!");
+// === 7. Лог при загрузке ===
+console.log("✅ InDriveAtlas script loaded!");
