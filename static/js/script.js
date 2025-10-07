@@ -132,3 +132,9 @@ document.getElementById("forecastBtn")?.addEventListener("click", loadDemandFore
 
 // === 8. Лог при загрузке ===
 console.log("✅ InDriveAtlas script fully loaded (dark mode + animations)!");
+// === FIX: показать элементы, если они уже видны при загрузке ===
+window.addEventListener("load", () => {
+  document.querySelectorAll(".feature, .capability, .faq-item, .atlas, .features, .capabilities").forEach(el => {
+    el.classList.add("fade-in");
+  });
+});
