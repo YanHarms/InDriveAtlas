@@ -510,24 +510,32 @@ color: #111;
   transform: translateY(40px);
 }
 /* Плавное появление секций */
+/* === Fade-in эффекты === */
 .fade-in {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+/* Если observer не сработал — всё видно */
 .feature, .capability, .faq-item, .atlas, .features, .capabilities {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
+  transform: none;
 }
 
-/* Убираем рекламную надпись Leaflet */
+/* Убираем надпись Leaflet */
 .leaflet-control-attribution,
 .leaflet-control-container .leaflet-bottom.leaflet-right {
   display: none !important;
 }
 
-/* Мягкая анимация фона хедера */
+/* Плавная анимация хедера */
 header {
   transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* === TEMP FIX: вернуть видимость всего контента === */
+section, .feature, .capability, .faq-item, .atlas, .features, .capabilities {
+  opacity: 1 !important;
+  transform: none !important;
 }
