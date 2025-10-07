@@ -505,10 +505,7 @@ color: #111;
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.feature, .capability, .faq-item, .atlas, .features, .capabilities {
-  opacity: 0;
-  transform: translateY(40px);
-}
+
 /* Плавное появление секций */
 /* === Fade-in эффекты === */
 .fade-in {
@@ -535,7 +532,14 @@ header {
 }
 
 /* === TEMP FIX: вернуть видимость всего контента === */
-section, .feature, .capability, .faq-item, .atlas, .features, .capabilities {
-  opacity: 1 !important;
-  transform: none !important;
+
+/* ===== FIX: контент поверх фона ===== */
+.hero-content,
+.features,
+.capabilities,
+.atlas,
+.faq,
+footer {
+  position: relative;
+  z-index: 10;
 }

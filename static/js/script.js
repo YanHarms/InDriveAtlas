@@ -68,7 +68,7 @@ async function loadDemandForecast() {
     const response = await fetch("/demand_forecast");
     const data = await response.json();
 
-    const ctx = document.getElementById("forecastChart")?.getContext("2d");
+    const ctx = document.getElementById("demandChart")?.getContext("2d");
     if (!ctx) return console.warn("forecastChart canvas not found");
 
     new Chart(ctx, {
