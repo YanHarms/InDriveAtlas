@@ -499,3 +499,35 @@ transition: all 0.3s ease;
 background: #B8FF3B;
 color: #111;
 }
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.feature, .capability, .faq-item, .atlas, .features, .capabilities {
+  opacity: 0;
+  transform: translateY(40px);
+}
+/* Плавное появление секций */
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.feature, .capability, .faq-item, .atlas, .features, .capabilities {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Убираем рекламную надпись Leaflet */
+.leaflet-control-attribution,
+.leaflet-control-container .leaflet-bottom.leaflet-right {
+  display: none !important;
+}
+
+/* Мягкая анимация фона хедера */
+header {
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
