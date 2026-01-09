@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InDrive Atlas — Dashboard</title>
+
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/pages/dashboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">IA</div>
+        <div class="brand-text">
+          <div class="brand-title">InDrive Atlas</div>
+          <div class="brand-subtitle">Analytics demo</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link active" href="/dashboard">Dashboard</a>
+        <a class="nav-link" href="/map">Map</a>
+        <a class="nav-link" href="/">Home</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-muted">Data source: Google Drive CSV</div>
+        <div class="mini-muted">API: FastAPI</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle">Сводка и динамика спроса по часам</div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn btn-ghost" id="btnRefresh" type="button">Refresh</button>
+          <a class="btn btn-primary" href="/map">Open map</a>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="grid kpi-grid">
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Total trips</div>
+              <div class="badge" id="badgeTrips">—</div>
+            </div>
+            <div class="kpi-value" id="kpiTotalTrips">—</div>
+            <div class="kpi-help">Количество уникальных поездок в датасете</div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Peak hour</div>
+              <div class="badge badge-accent" id="badgePeak">—</div>
+            </div>
+            <div class="kpi-value" id="kpiPeakHour">—</div>
+            <div class="kpi-help">Час с максимальным спросом</div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Avg / hour</div>
+              <div class="badge" id="badgeAvg">—</div>
+            </div>
+            <div class="kpi-value" id="kpiAvgPerHour">—</div>
+            <div class="kpi-help">Среднее число поездок в час</div>
+          </div>
+        </div>
+
+        <div class="grid main-grid">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <div class="card-title">Demand by hour</div>
+                <div class="card-subtitle">Источник: /api/demand-forecast</div>
+              </div>
+              <div class="right-tools">
+                <span class="status-dot" id="statusDot"></span>
+                <span class="mini-muted" id="statusText">Idle</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="canvas-wrap">
+                <canvas id="demandChart"></canvas>
+              </div>
+              <div class="note" id="noteBox" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <div class="card-title">Top hours</div>
+                <div class="card-subtitle">Топ 8 часов по спросу</div>
+              </div>
+              <button class="btn btn-ghost" id="btnCopy" type="button">Copy JSON</button>
+            </div>
+
+            <div class="card-body">
+              <div class="table-wrap">
+                <table class="table" id="topTable">
+                  <thead>
+                    <tr>
+                      <th>Hour</th>
+                      <th class="right">Trips</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="2" class="muted">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="mini-muted" style="margin-top:10px;">
+                Подсказка: это идеальная секция для будущего “аномалии/alerts”.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

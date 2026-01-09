@@ -1,45 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Landing page styles (no map, no charts) */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #fffbea;
-  color: #111;
-  line-height: 1.4;
-}
-
+/* Header */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .header-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: transparent;
-  transform: translateY(-100%);
-  transition: transform 0.4s ease, background 0.3s, box-shadow 0.3s;
+  transform: translateY(0);
+  transition: background 0.3s, box-shadow 0.3s;
   z-index: -1;
 }
 
 header.scrolled .header-bg {
   background: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-}
-
-header.show .header-bg {
-  transform: translateY(0);
 }
 
 .header-content {
@@ -103,6 +85,7 @@ header.scrolled .menu-btn:hover {
   background: #f2f2f2;
 }
 
+/* Hero */
 .hero {
   position: relative;
   width: 100%;
@@ -115,20 +98,16 @@ header.scrolled .menu-btn:hover {
 
 .hero-bg {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  top: 0;
-  left: 0;
   z-index: -2;
 }
 
 .hero-overlay-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(rgba(174, 139, 102, 0.25), rgba(80, 60, 40, 0.6));
   z-index: -1;
 }
@@ -141,6 +120,8 @@ header.scrolled .menu-btn:hover {
   opacity: 0;
   transform: translateY(40px);
   animation: fadeInUp 1s ease forwards;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-content h1 {
@@ -150,6 +131,30 @@ header.scrolled .menu-btn:hover {
   margin-bottom: 30px;
 }
 
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width:768px) {
+  .hero-content h1 {
+    font-size: 32px;
+  }
+  .header-content {
+    padding: 12px 18px;
+  }
+  .logo {
+    font-size: 28px;
+  }
+  .logo-img {
+    height: 46px;
+    margin-right: -16px;
+  }
+}
+
+/* Shared */
 .highlight {
   background-color: #B8FF3B;
   display: inline-block;
@@ -170,6 +175,10 @@ header.scrolled .menu-btn:hover {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .cta-btn:hover {
@@ -177,19 +186,7 @@ header.scrolled .menu-btn:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width:768px) {
-  .hero-content h1 {
-    font-size: 32px;
-  }
-}
-
+/* Features */
 .features {
   min-height: 100vh;
   padding: 80px 10%;
@@ -203,6 +200,13 @@ header.scrolled .menu-btn:hover {
   font-size: 32px;
   margin-bottom: 30px;
   font-weight: 700;
+}
+
+.features-subtitle {
+  font-size: 18px;
+  color: #444;
+  margin: 0 auto 40px;
+  max-width: 700px;
 }
 
 .features-grid {
@@ -219,122 +223,32 @@ header.scrolled .menu-btn:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.features-subtitle {
-  font-size: 18px;
-  color: #444;
-  margin: 0 auto 40px;
-  max-width: 700px;
-}
-
-.feature i {
-  font-size: 32px;
-  color: #B8FF3B;
-  -webkit-text-stroke: 1px #000;
-  text-stroke: 1px #000;
+.feature-img {
+  width: 250px;
+  height: auto;
   margin-bottom: 12px;
-
+  display: block;
 }
 
 .features .cta-btn {
   margin-top: 50px;
-}
-
-.atlas {
-  padding: 80px 5%;
-  background: #fffbea;
   position: relative;
+  z-index: 10;
 }
 
-.atlas h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
-  text-align: center;
+.features::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(184, 255, 59, 0.25) 0%, transparent 70%);
+  transform: translateX(-50%);
+  z-index: 0;
 }
 
-.atlas p {
-  margin-bottom: 30px;
-  text-align: center;
-  color: #444;
-}
-
-.atlas-layout {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.atlas-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  flex: 1;
-  max-width: 320px;
-}
-
-.capability-icon {
-  font-size: 24px;
-  color: #B8FF3B;
-  flex-shrink: 0;
-  -webkit-text-stroke: 1px #000;
-  text-stroke: 1px #000;
-}
-
-.capability-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px 20px;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.capability-card:hover {
-  border-color: #B8FF3B;
-  background: #f9fff2;
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.capability-icon img {
-  width: 28px;
-  height: 28px;
-}
-
-.capability-text h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.capability-text p {
-  font-size: 14px;
-  color: #555;
-}
-
-.atlas-map {
-  flex: 2;
-}
-
-#map {
-  width: 100%;
-  height: 500px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-}
-
-footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-}
-
+/* Capabilities */
 .capabilities {
   padding: 100px 10%;
   background: #fffbea;
@@ -366,6 +280,7 @@ footer {
   font-size: 20px;
 }
 
+/* Labels */
 .section-label {
   display: inline-block;
   font-size: 14px;
@@ -379,30 +294,11 @@ footer {
   margin-bottom: 12px;
 }
 
-.features::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(184, 255, 59, 0.25) 0%, transparent 70%);
-  transform: translateX(-50%);
-  z-index: 0;
-}
-
-.feature-img {
-  width: 250px;
-  height: auto;
-  margin-bottom: 12px;
-  display: block;
-}
-
+/* FAQ */
 .faq {
   background: #fffbea;
   padding: 80px 10%;
   text-align: center;
-  font-family: "Inter", sans-serif;
 }
 
 .faq h2 {
@@ -473,73 +369,71 @@ footer {
   padding: 20px 28px;
 }
 
-.features .cta-btn {
-  position: relative;
-  z-index: 10;
+/* Preview section (demo cards) */
+.preview{
+  padding: 100px 10%;
+  background: #fffbea;
+  text-align:center;
 }
 
-.skip-btn {
-position: absolute;
-bottom: 100px;
-left: 250px;
-z-index: 1000;
-padding: 14px 26px;
-background: #fff;
-color: #111;
-border: 2px solid #B8FF3B;
-border-radius: 12px;
-font-weight: 600;
-font-size: 16px;
-cursor: pointer;
-box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-transition: all 0.3s ease;
+.preview-grid{
+  margin-top: 40px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
-.skip-btn:hover {
-background: #B8FF3B;
-color: #111;
-}
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+.preview-card{
+  display:block;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius: 16px;
+  padding: 18px;
+  text-align:left;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
 }
 
+.preview-card:hover{
+  transform: translateY(-3px);
+  border-color:#B8FF3B;
+  box-shadow: 0 14px 30px rgba(0,0,0,.12);
+}
 
-/* Плавное появление секций */
-/* === Fade-in эффекты === */
-.fade-in {
+.preview-img{
+  height: 170px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #eee;
+}
+
+.skeleton{
+  background: linear-gradient(90deg, #f2f2f2 25%, #eaeaea 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer{
+  0%{ background-position: 100% 0; }
+  100%{ background-position: 0 0; }
+}
+
+/* Footer */
+footer {
+  background: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+/* Fade-in helper (for landing.js IntersectionObserver) */
+.fade-in{
   opacity: 1 !important;
   transform: translateY(0) !important;
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity .8s ease-out, transform .8s ease-out;
 }
-
-/* Если observer не сработал — всё видно */
-.feature, .capability, .faq-item, .atlas, .features, .capabilities {
-  opacity: 1;
-  transform: none;
-}
-
-/* Убираем надпись Leaflet */
-.leaflet-control-attribution,
-.leaflet-control-container .leaflet-bottom.leaflet-right {
-  display: none !important;
-}
-
-/* Плавная анимация хедера */
-header {
-  transition: background 0.4s ease, box-shadow 0.4s ease;
-}
-
-/* === TEMP FIX: вернуть видимость всего контента === */
-
-/* ===== FIX: контент поверх фона ===== */
-.hero-content,
-.features,
-.capabilities,
-.atlas,
-.faq,
-footer {
-  position: relative;
-  z-index: 10;
+.feature, .capability, .faq-item, .features, .capabilities, .preview {
+  opacity: 0;
+  transform: translateY(14px);
 }

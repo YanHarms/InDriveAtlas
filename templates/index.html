@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <title>InDrive — Честные поездки</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="static/css/styleInDrive.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="static/css/pages/landing.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <header id="header">
@@ -58,7 +57,7 @@
       <p>Оценка спроса по времени суток и дням недели.</p>
     </div>
   </div>
-  <button class="cta-btn demo-btn">Попробовать демо</button>
+  <a class="cta-btn demo-btn" href="/dashboard">Попробовать демо</a>
 </section>
 <section class="capabilities">
   <h2>Что умеет inDrive Atlas?</h2>
@@ -81,62 +80,38 @@
     </div>
   </div>
 </section>
-<section class="atlas">
-  <h2>inDrive Atlas</h2>
-  <p>Интерактивная карта и набор инструментов для анализа поездок.</p>
-  <div class="atlas-layout">
-    <div class="atlas-controls">
-      <div class="capability-card">
-        <div class="capability-icon">
-          <i class="fa-solid fa-car"></i>
-        </div>
-        <div class="capability-text">
-          <h3>Симуляция поездки</h3>
-        </div>
-      </div>
-      <div class="capability-card">
-        <div class="capability-icon">
-          <i class="fa-solid fa-fire"></i>
-        </div>
-        <div class="capability-text">
-          <h3>Горячие зоны</h3>
-        </div>
-      </div>
-      <div class="capability-card">
-        <div class="capability-icon">
-          <i class="fa-solid fa-chart-line"></i>
-        </div>
-        <div class="capability-text">
-          <h3>Прогноз спроса</h3>
-        </div>
-      </div>
-      <div class="capability-card">
-        <div class="capability-icon">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
-        <div class="capability-text">
-          <h3>Аномалии</h3>
-        </div>
-      </div>
-      <div class="capability-card">
-        <div class="capability-icon">
-          <i class="fa-solid fa-font-awesome"></i>
-        </div>
-        <div class="capability-text">
-          <h3>Рекомендации водителям</h3>
-        </div>
-      </div>
-    </div>
-    <div class="atlas-map" id="mapContainer">
-      <div id="map"></div>
-    </div>
-    <div class="atlas-chart" id="chartContainer" style="display: none;">
-      <button id="backToMap" class="skip-btn">Назад к карте</button>
-      <canvas id="demandChart"></canvas>
-    </div>
+<section class="preview">
+  <span class="section-label">DEMO PREVIEW</span>
+  <h2>Как выглядит аналитика</h2>
+  <p class="features-subtitle">
+    Полный интерактив доступен в демо-разделе: Dashboard, Trips, Map.
+  </p>
 
+  <div class="preview-grid">
+    <a class="preview-card" href="/dashboard">
+      <div class="preview-img skeleton"></div>
+      <h3>Dashboard</h3>
+      <p>KPI и динамика спроса по часам.</p>
+    </a>
+
+    <a class="preview-card" href="/trips">
+      <div class="preview-img skeleton"></div>
+      <h3>Trips</h3>
+      <p>Таблица поездок, поиск и экспорт CSV.</p>
+    </a>
+
+    <a class="preview-card" href="/map">
+      <div class="preview-img skeleton"></div>
+      <h3>Map</h3>
+      <p>Hotzones, heatmap и просмотр поездки по ID.</p>
+    </a>
+  </div>
+
+  <div style="margin-top:40px;">
+    <a class="cta-btn demo-btn" href="/dashboard">Открыть демо</a>
   </div>
 </section>
+
 <section class="faq">
   <span class="section-label">Часто задаваемые вопросы</span>
   <h2>
@@ -173,8 +148,6 @@
 <footer>
   <p>© 2025 inDrive. Все права защищены.</p>
 </footer>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
-<script src="static/js/script.js"></script>
+<script src="static/js/landing.js"></script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+.filters{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#q{ width: 260px; }
+
+.trip-link code{
+  cursor:pointer;
+}
+.trip-link:hover code{
+  text-decoration: underline;
+}

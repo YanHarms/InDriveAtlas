@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InDrive Atlas — Trips</title>
+
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/pages/trips.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">IA</div>
+        <div class="brand-text">
+          <div class="brand-title">InDrive Atlas</div>
+          <div class="brand-subtitle">Trips demo</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+        <a class="nav-link" href="/map">Map</a>
+        <a class="nav-link active" href="/trips">Trips</a>
+        <a class="nav-link" href="/">Home</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-muted">API: /api/trips</div>
+        <div class="mini-muted">CSV export included</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title">Trips</div>
+          <div class="page-subtitle">Таблица поездок (пагинация + поиск + экспорт)</div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn btn-ghost" id="btnPrev" type="button">Prev</button>
+          <button class="btn btn-ghost" id="btnNext" type="button">Next</button>
+          <button class="btn btn-primary" id="btnExport" type="button">Export CSV</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">Browse</div>
+              <div class="card-subtitle" id="metaText">—</div>
+            </div>
+
+            <div class="filters">
+              <input class="input" id="q" placeholder="Search trip id (e.g., trip_12)" />
+              <select class="input" id="limit">
+                <option value="25">25</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+              </select>
+              <button class="btn btn-ghost" id="btnRefresh" type="button">Refresh</button>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="table-wrap">
+              <table class="table" id="tripsTable">
+                <thead>
+                  <tr>
+                    <th>Trip ID</th>
+                    <th>Timestamp</th>
+                    <th class="right">Lat</th>
+                    <th class="right">Lon</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="4" class="muted">Loading…</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mini-muted" style="margin-top:10px;">
+              Tip: клик по Trip ID можно потом сделать ссылкой на /map?trip_id=...
+            </div>
+          </div>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/trips.js"></script>
+</body>
+</html>

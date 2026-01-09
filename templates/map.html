@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InDrive Atlas — Map</title>
+
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/pages/map.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">IA</div>
+        <div class="brand-text">
+          <div class="brand-title">InDrive Atlas</div>
+          <div class="brand-subtitle">Map demo</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+        <a class="nav-link active" href="/map">Map</a>
+        <a class="nav-link" href="/">Home</a>
+      </nav>
+
+      <div class="panel">
+        <div class="panel-title">Controls</div>
+
+        <div class="field">
+          <label class="label">Mode</label>
+          <div class="segmented">
+            <button class="seg-btn active" data-mode="hotzones" type="button">Hotzones</button>
+            <button class="seg-btn" data-mode="trip" type="button">Trip by ID</button>
+            <button class="seg-btn" data-mode="simulate" type="button">Simulate</button>
+          </div>
+        </div>
+
+        <div class="field" id="tripField" style="display:none;">
+          <label class="label" for="tripId">Trip ID</label>
+          <div class="row">
+            <input class="input" id="tripId" placeholder="trip_123" />
+            <button class="btn btn-primary" id="btnLoadTrip" type="button">Load</button>
+          </div>
+          <button class="btn btn-ghost" id="btnRandomId" type="button" style="width:100%; margin-top:10px;">
+            Random ID
+          </button>
+        </div>
+
+        <div class="field" id="hotzonesField">
+          <label class="label">Hotzones sample</label>
+          <div class="row">
+            <button class="btn btn-primary" id="btnLoadHotzones" type="button">Load hotzones</button>
+            <button class="btn btn-ghost" id="btnClear" type="button">Clear</button>
+          </div>
+          <div class="mini-muted" style="margin-top:10px;">
+            Источник: /api/hotzones (до 200 точек)
+          </div>
+        </div>
+
+        <div class="field" id="simulateField" style="display:none;">
+          <label class="label">Simulate trip</label>
+          <button class="btn btn-primary" id="btnSimulate" type="button" style="width:100%;">Simulate</button>
+          <div class="mini-muted" style="margin-top:10px;">
+            Источник: /api/simulate-trip
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Layer</label>
+          <div class="row">
+            <button class="btn btn-ghost" id="btnPoints" type="button">Points</button>
+            <button class="btn btn-ghost" id="btnHeat" type="button">Heat</button>
+          </div>
+          <div class="mini-muted" style="margin-top:10px;">
+            Heatmap включается для hotzones/poins
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="mini-muted">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">Idle</span>
+        </div>
+
+        <div class="note" id="noteBox" style="display:none;"></div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a class="mini-link" href="/dashboard">← back to dashboard</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title">Map</div>
+          <div class="page-subtitle">Leaflet + Heat layer, hotzones & trips</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-ghost" id="btnFit" type="button">Fit bounds</button>
+        </div>
+      </header>
+
+      <section class="content map-content">
+        <div class="card map-card">
+          <div id="map"></div>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <script src="/static/js/map.js"></script>
+</body>
+</html>

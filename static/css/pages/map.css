@@ -1,0 +1,21 @@
+.map-content{ padding-top: 0; }
+
+.map-card{
+  height: calc(100vh - 120px);
+  overflow:hidden;
+}
+
+#map{
+  width:100%;
+  height: 100%;
+  border-radius: var(--r-lg);
+}
+
+/* Leaflet attribution — аккуратно, но НЕ скрывать */
+.leaflet-control-attribution{
+  background: rgba(255,255,255,0.75) !important;
+  border-radius: 12px;
+  padding: 6px 10px !important;
+  margin: 10px !important;
+  font-size: 12px !important;
+}
